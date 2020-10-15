@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Container from '@material-ui/core/Container'
 
 import history from '../Utilities/history'
+import Login from './Login'
 import Register from './Register'
 import { authenticationService } from '../Services/authenticationService'
 
 const Home = () => {
-  const [page, setPage] = useState('register')
+  const [page, setPage] = useState('login')
 
   useEffect(() => {
     if (authenticationService.currentUserValue) history.push('/chat')
@@ -18,7 +19,7 @@ const Home = () => {
 
   let Content
 
-  if (page === 'login') console.log('login')
+  if (page === 'login') Content = <Login handleClick={handleClick} />
   else Content = <Register handleClick={handleClick} />
 
   return (
