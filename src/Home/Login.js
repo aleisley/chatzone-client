@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik'
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
 import TextField from '@material-ui/core/TextField'
@@ -23,22 +24,8 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    width: '100%',
-    backgroundColor: '#1976d2',
-    border: 'none',
-    padding: '6px 16px',
-    fontSize: '0.875rem',
-    color: '#fff',
-    boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2)',
-    minWidth: '64px',
-    boxSizing: 'border-box',
-    fontFamily: 'Roboto',
-    fontWeight: '500',
-    lineHeight: '1.75',
-    borderRadius: '4px',
-    letterSpacing: '0.02857em',
-    cursor: 'pointer',
-  }
+  },
+
 }))
 
 const Login = props => {
@@ -135,12 +122,15 @@ const Login = props => {
                     onChange={handleChange}
                     type="password"
                   />
-                  <button
+                  <Button
                     type="submit"
+                    fullWidth={true}
+                    variant="contained"
+                    color="primary"
                     className={classes.submit}
                   >
                     Login
-                  </button>
+                  </Button>
 
                 </form>
               )}
