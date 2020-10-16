@@ -49,21 +49,26 @@ const User = props => {
 
   return (
     <List className={classes.list}>
-      {users.map(user => (
-        <ListItem
-          className={classes.listItem}
-          key={user._id}
-          onClick={() => {
-            props.setUser(user)
-            props.setScope(user.name)
-          }}
-        >
-          <ListItemAvatar className={classes.avatar}>
-            <Avatar>AD</Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={user.name} />
-        </ListItem>
-      ))}
+      {users && (
+        <React.Fragment>
+          {users.map(u => (
+            <ListItem
+              className={classes.listItem}
+              key={u._id}
+              onClick={() => {
+                props.setUser(u);
+                props.setScope(u.name);
+              }}
+              button
+            >
+              <ListItemAvatar className={classes.avatar}>
+                <Avatar>AD</Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={u.name} />
+            </ListItem>
+          ))}
+        </React.Fragment>
+      )}
     </List>
   )
 }

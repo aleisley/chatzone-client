@@ -12,7 +12,7 @@ export const useGetUsers = () => {
 
   const getUsers = () => {
     return fetch(
-      'http://localhost:5000/api/users/',
+      'http://localhost:5000/api/v1/users/',
       requestOptions
     )
       .then(handleResponse)

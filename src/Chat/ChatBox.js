@@ -130,29 +130,31 @@ const ChatBox = props => {
       <Grid item xs={12}>
         <Grid container className={classes.messageContainer}>
           <Grid item xs={12} className={classes.messagesRow}>
-            <List>
-              {messages.map(message => (
-                <ListItem
-                  key={message._id}
-                  className={classes.listItem}
-                  alignItems="flex-start"
-                >
-                  <ListItemAvatar
-                    className={classes.avatar}
+            {messages && (
+              <List>
+                {messages.map(m => (
+                  <ListItem
+                    key={m._id}
+                    className={classes.listItem}
+                    alignItems="flex-start"
                   >
-                    <Avatar>H</Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={message.fromObj[0].name}
-                    secondar={
-                      <React.Fragment>
-                        {message.body}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
+                    <ListItemAvatar
+                      className={classes.avatar}
+                    >
+                      <Avatar>H</Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={m.fromObj[0].name}
+                      secondary={
+                        <React.Fragment>
+                          {m.body}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            )}
             <div ref={chatBottom} />
           </Grid>
 
