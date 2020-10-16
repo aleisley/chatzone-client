@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -35,10 +35,73 @@ const Conversations = props => {
   const [conversations, setConversations] = useState([])
   const [newConversation, setNewConversation] = useState(null)
   const getConversations = useGetConversations()
-  return (
-    <div>
 
-    </div>
+  const handleRecipient = recipients => {
+    recipients.forEach(recipient => {
+      if (recipient.username !== authenticationService.currentUserValue.username) {
+        return recipient
+      }
+    })
+    return null
+  }
+
+  useEffect(() => {
+    getConversations().then(res => setConversations(res))
+  }, [newConversation])
+
+  useEffect(() => {
+    let socket = socketIOClient('http://localhost:5000')
+    socket.on('messages', data => setNewConversation(data))
+
+    return () => {
+      socket.removeListener('messages')
+    }
+  }, [])
+
+  return (
+    <List className={classes.list}>
+      <ListItem
+        classes={{ root: classes.subheader }}
+        onClick={() => {
+          props.setScope('Global Chat')
+        }}
+      >
+        <ListItemAvatar>
+          <Avatar className={classes.globe}>
+            <LanguageIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          className={classes.subheaderText}
+          primary="Global Chat"
+        />
+      </ListItem>
+      <Divider />
+
+      {conversations.map(c => (
+        <ListItem
+          className={classes.listItem}
+          key={c._id}
+          button
+          onClick={() => {
+            props.setUser(handleRecipient(c.recipientObj))
+            props.setScope(handleRecipient(c.recipientObj).name)
+          }}
+        >
+          <ListItemAvatar>
+            <Avatar>AD</Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary={handleRecipient(c.recipientObj).name}
+            secondary={
+              <React.Fragment>
+                {c.lastMessage}
+              </React.Fragment>
+            }
+          />
+        </ListItem>
+      ))}
+    </List>
   )
 }
 
