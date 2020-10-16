@@ -8,7 +8,7 @@ import Tab from '@material-ui/core/Tab'
 import Header from '../Layout/Header'
 import ChatBox from './ChatBox'
 import Conversations from './Conversations'
-import Users from './Users'
+import Users from './User'
 
 const useStyles = makeStyles(theme => ({
   paper: {

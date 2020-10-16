@@ -5,10 +5,10 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/styles'
 import { SnackbarProvider } from 'notistack'
 
-// import Home from './Home/Home'
 import PrivateRoute from './Utilities/private-route'
 import history from './Utilities/history'
 import Home from './Home/Home'
+import Chat from './Chat/Chat'
 
 const theme = createMuiTheme({
   palette: {
@@ -33,13 +33,13 @@ const theme = createMuiTheme({
 })
 
 const App = () => {
-  console.log(history)
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
         <Router history={history}>
           <Route path="/" exact component={Home} />
+          <PrivateRoute path="/chat" component={Chat} />
         </Router>
       </SnackbarProvider>
     </ThemeProvider>

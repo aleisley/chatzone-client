@@ -1,8 +1,8 @@
 import useHandleResponse from '../Utilities/handle-response'
 import authHeader from '../Utilities/auth-header'
-import { useSnackbar } from 'nontistack'
+import { useSnackbar } from 'notistack'
 
-export default () => {
+export const useGetUsers = () => {
   const { enqueueSnackbar } = useSnackbar()
   const handleResponse = useHandleResponse()
   const requestOptions = {
