@@ -37,12 +37,15 @@ const Conversations = props => {
   const getConversations = useGetConversations()
 
   const handleRecipient = recipients => {
-    recipients.forEach(recipient => {
-      if (recipient.username !== authenticationService.currentUserValue.username) {
-        return recipient
+    for (let i = 0; i < recipients.length; i++) {
+      if (
+        recipients[i].username !==
+        authenticationService.currentUserValue.username
+      ) {
+        return recipients[i];
       }
-    })
-    return null
+    }
+    return null;
   }
 
   useEffect(() => {
