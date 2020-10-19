@@ -30,6 +30,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const backendUrl = (
+  process.env.REACT_APP_BACKEND_URL ?
+    process.env.REACT_APP_BACKEND_URL :
+    'http://localhost:5000'
+)
+
+
 const User = props => {
   const classes = useStyles()
   const [users, setUsers] = useState([])
@@ -41,7 +48,7 @@ const User = props => {
   }, [newUser])
 
   useEffect(() => {
-    const socket = socketIOClient('http://localhost:5000')
+    const socket = socketIOClient(backendUrl)
     socket.on('users', data => {
       setNewUser(data)
     })

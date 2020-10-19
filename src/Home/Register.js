@@ -8,7 +8,8 @@ import TextField from '@material-ui/core/TextField'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import history from '../Utilities/history'
+// import history from '../Utilities/history'
+import { useHistory } from 'react-router-dom'
 import { useRegister } from '../Services/authenticationService'
 
 const useStyles = makeStyles(theme => ({
@@ -30,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 const Register = props => {
   const register = useRegister()
   const classes = useStyles()
-  console.log(classes.submit)
+  const history = useHistory()
 
   return (
     <div className={classes.paper}>

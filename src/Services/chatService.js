@@ -2,6 +2,12 @@ import useHandleResponse from '../Utilities/handle-response'
 import authHeader from '../Utilities/auth-header'
 import { useSnackbar } from 'notistack'
 
+const backendUrl = (
+  process.env.REACT_APP_BACKEND_URL ?
+    process.env.REACT_APP_BACKEND_URL :
+    'http://localhost:5000'
+)
+
 // Receive global messages
 export const useGetGlobalMessages = () => {
   const { enqueueSnackbar } = useSnackbar()
@@ -13,7 +19,8 @@ export const useGetGlobalMessages = () => {
 
   const getGlobalMessages = () => {
     return fetch(
-      'http://localhost:5000/api/v1/messages/global',
+      // 'http://localhost:5000/api/v1/messages/global',
+      `${backendUrl}/api/v1/messages/global`,
       requestOptions
     )
       .then(handleResponse)
@@ -39,7 +46,8 @@ export const useSendGlobalMessage = () => {
     }
 
     return fetch(
-      'http://localhost:5000/api/v1/messages/global',
+      // 'http://localhost:5000/api/v1/messages/global',
+      `${backendUrl}/api/v1/messages/global`,
       requestOptions
     )
       .then(handleResponse)
@@ -64,7 +72,8 @@ export const useGetConversations = () => {
 
   const getConversations = () => {
     return fetch(
-      'http://localhost:5000/api/v1/messages/conversations',
+      // 'http://localhost:5000/api/v1/messages/conversations',
+      `${backendUrl}/api/v1/messages/conversations`,
       requestOptions
     )
       .then(handleResponse)
@@ -88,7 +97,8 @@ export const useGetConversationMessages = () => {
 
   const getConversationMessages = id => {
     return fetch(
-      `http://localhost:5000/api/v1/messages/conversations/query?userId=${id}`,
+      // `http://localhost:5000/api/v1/messages/conversations/query?userId=${id}`,
+      `${backendUrl}/api/v1/messages/conversations/query?userId=${id}`,
       requestOptions
     )
       .then(handleResponse)
@@ -114,7 +124,8 @@ export const useSendConversationMessage = () => {
     }
 
     return fetch(
-      'http://localhost:5000/api/v1/messages',
+      // 'http://localhost:5000/api/v1/messages',
+      `${backendUrl}/api/v1/messages`,
       requestOptions
     )
       .then(handleResponse)

@@ -30,6 +30,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const backendUrl = (
+  process.env.REACT_APP_BACKEND_URL ?
+    process.env.REACT_APP_BACKEND_URL :
+    'http://localhost:5000'
+)
+
+
 const Conversations = props => {
   const classes = useStyles()
   const [conversations, setConversations] = useState([])
@@ -53,7 +60,7 @@ const Conversations = props => {
   }, [newConversation])
 
   useEffect(() => {
-    let socket = socketIOClient('http://localhost:5000')
+    let socket = socketIOClient(backendUrl)
     socket.on('messages', data => setNewConversation(data))
 
     return () => {

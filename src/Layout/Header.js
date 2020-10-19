@@ -10,7 +10,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 
 import { authenticationService } from '../Services/authenticationService'
-import history from '../Utilities/history'
+// import history from '../Utilities/history'
+import { useHistory } from 'react-router-dom'
 import logo from './images.jpeg'
 
 const useStyles = makeStyles(theme => ({
@@ -34,6 +35,7 @@ const Header = () => {
   const [currentUser] = useState(authenticationService.currentUserValue)
   const [anchorEl, setAnchorEl] = useState(null)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const history = useHistory()
 
   const handleDropClose = () => {
     setDropdownOpen(false)
@@ -91,7 +93,9 @@ const Header = () => {
               horizontal: 'right'
             }}
           >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <Link to='/'>Logout</Link>
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

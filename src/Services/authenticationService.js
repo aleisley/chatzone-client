@@ -7,6 +7,12 @@ const currentUserSubject = new BehaviorSubject(
   JSON.parse(localStorage.getItem('currentUser'))
 )
 
+const backendUrl = (
+  process.env.REACT_APP_BACKEND_URL ?
+    process.env.REACT_APP_BACKEND_URL :
+    'http://localhost:5000'
+)
+
 const logout = () => {
   localStorage.removeItem('currentUser')
   currentUserSubject.next(null)
@@ -32,7 +38,8 @@ export const useLogin = () => {
     }
 
     return fetch(
-      `http://localhost:5000/login`,
+      // `http://localhost:5000/login`,
+      `${backendUrl}/login`,
       requestOptions
     )
       .then(handleResponse)
@@ -42,7 +49,6 @@ export const useLogin = () => {
         return user
       })
       .catch(err => {
-        console.log(err)
         enqueueSnackbar('Failed to Login', {
           variant: 'error'
         })
@@ -64,7 +70,8 @@ export const useRegister = () => {
     }
 
     return fetch(
-      'http://localhost:5000/register',
+      // 'http://localhost:5000/register',
+      `${backendUrl}/register`,
       requestOptions
     )
       .then(handleResponse)

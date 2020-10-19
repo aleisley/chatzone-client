@@ -8,7 +8,8 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import * as Yup from 'yup'
 
-import history from '../Utilities/history'
+// import history from '../Utilities/history'
+import { useHistory } from 'react-router-dom'
 import { useLogin } from '../Services/authenticationService'
 
 const useStyles = makeStyles(theme => ({
@@ -31,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 const Login = props => {
   const login = useLogin()
   const classes = useStyles()
+  const history = useHistory()
 
   return (
     <div className={classes.paper}>
@@ -63,7 +65,7 @@ const Login = props => {
                   const { from } = history.location.state || {
                     from: { pathname: '/chat' },
                   };
-                  history.push(from);
+                  history.push('/chat');
                 },
                 error => {
                   setSubmitting(false);
@@ -143,7 +145,7 @@ const Login = props => {
               href="#"
             >
               Don't have an account?
-                    </Link>
+            </Link>
           </Typography>
         </Grid>
       </Grid>

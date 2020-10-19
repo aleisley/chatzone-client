@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch, BrowserRouter } from 'react-router-dom'
 import { createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/styles'
@@ -37,10 +37,12 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
-        <Router history={history}>
-          <Route exact path="/" component={Home} />
-          <PrivateRoute path="/chat" component={Chat} />
-        </Router>
+        <BrowserRouter history={history}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <PrivateRoute path="/chat" component={Chat} />
+          </Switch>
+        </BrowserRouter>
       </SnackbarProvider>
     </ThemeProvider>
   )

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 
-import history from '../Utilities/history'
+// import history from '../Utilities/history'
 import Login from './Login'
 import Register from './Register'
 import { authenticationService } from '../Services/authenticationService'
 
 const Home = () => {
   const [page, setPage] = useState('login')
+  const history = useHistory()
 
   useEffect(() => {
     if (authenticationService.currentUserValue) history.push('/chat')

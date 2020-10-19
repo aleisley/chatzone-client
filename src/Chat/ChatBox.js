@@ -61,6 +61,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const backendUrl = (
+  process.env.REACT_APP_BACKEND_URL ?
+    process.env.REACT_APP_BACKEND_URL :
+    'http://localhost:5000'
+)
+
+
 const ChatBox = props => {
   const [newMessage, setNewMessage] = useState('')
   const [messages, setMessages] = useState([])
@@ -98,7 +105,7 @@ const ChatBox = props => {
   }, [lastMessage, props.scope, props.conversationId])
 
   useEffect(() => {
-    const socket = socketIOClient('http://localhost:5000')
+    const socket = socketIOClient(backendUrl)
     socket.on('messages', data => setLastMessage(data))
   })
 
